@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet,Image, TextInput, TouchableOpacity} from 'react-native'
 import React, {useState} from 'react'
 
-export default function login() {
+export default function login({navigation}) {
    const [celular,setCelular] = useState();
    const [contraseña,setContraseña] = useState();
 
@@ -25,7 +25,7 @@ export default function login() {
                 onChangeText={(text) => setContraseña(text)}
             />
 
-            <TouchableOpacity style={styles.buton}>
+            <TouchableOpacity style={styles.buton} onPress={() => navigation.navigate('home')}>
                 <Text style={styles.textbuton}>
                     Ingresar
                 </Text>
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         borderStartWidth: 0.5,
         borderEndWidth: 0.5,
         borderTopWidth: 0,
+        marginTop:25
     },
     image:{
         marginTop:25,
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
         height:50,
         borderRadius:100,
         padding: 10,
+        color:'#00000090'
     },
     buton:{
         marginVertical:10,
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
         borderRadius:100,
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomWidth: 1,
+        borderBottomWidth: 1.5,
         borderStartWidth: 0.5,
         borderEndWidth: 0.5,
         borderTopWidth: 0,
