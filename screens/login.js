@@ -1,9 +1,32 @@
 import { View, Text, StyleSheet,Image, TextInput, TouchableOpacity} from 'react-native'
 import React, {useState} from 'react'
+import axios from 'axios'
 
 export default function login({navigation}) {
-   const [celular,setCelular] = useState();
-   const [contraseña,setContraseña] = useState();
+
+
+    //3015490654
+
+    const loged = () => {
+        axios({
+            method :"POST",
+            url:"http://54.162.179.163/contactame/action/api_login.php",
+            data:{
+                celular,
+                password,
+            },
+        })
+        .then((res) => {
+            navigation.navigate('home')
+            console.log(res.data);
+        })
+        .catch((e) => {
+           alert(e.message);
+        })
+    }
+
+   const [celular,setCelular] = useState("");
+   const [password,setpassword] = useState("");
 
   return (
     <View style={styles.container}>
@@ -21,11 +44,11 @@ export default function login({navigation}) {
             <TextInput 
                 style={styles.input}
                 placeholder='Contraseña'
-                value={contraseña}
-                onChangeText={(text) => setContraseña(text)}
+                value={password}
+                onChangeText={(text) => setpassword(text)}
             />
 
-            <TouchableOpacity style={styles.buton} onPress={() => navigation.navigate('home')}>
+            <TouchableOpacity onPress={loged} style={styles.buton} >
                 <Text style={styles.textbuton}>
                     Ingresar
                 </Text>
@@ -57,7 +80,6 @@ const styles = StyleSheet.create({
         borderStartWidth: 0.5,
         borderEndWidth: 0.5,
         borderTopWidth: 0,
-        marginTop:25
     },
     image:{
         marginTop:25,
@@ -72,7 +94,6 @@ const styles = StyleSheet.create({
         height:50,
         borderRadius:100,
         padding: 10,
-        color:'#00000090'
     },
     buton:{
         marginVertical:10,
@@ -85,7 +106,7 @@ const styles = StyleSheet.create({
         borderRadius:100,
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomWidth: 1.5,
+        borderBottomWidth: 1,
         borderStartWidth: 0.5,
         borderEndWidth: 0.5,
         borderTopWidth: 0,
