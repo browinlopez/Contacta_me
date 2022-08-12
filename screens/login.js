@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet,Image, TextInput, TouchableOpacity} from 'react-native'
 import React, {useState} from 'react'
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function login({navigation}) {
 
@@ -26,7 +27,7 @@ export default function login({navigation}) {
     }
 
    const [celular,setCelular] = useState("");
-   const [password,setpassword] = useState("");
+   const [password,setPassword] = useState("");
 
   return (
     <View style={styles.container}>
@@ -45,7 +46,7 @@ export default function login({navigation}) {
                 style={styles.input}
                 placeholder='Contraseña'
                 value={password}
-                onChangeText={(text) => setpassword(text)}
+                onChangeText={(text) => setPassword(text)}
             />
 
             <TouchableOpacity onPress={loged} style={styles.buton} >

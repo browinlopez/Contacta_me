@@ -1,16 +1,60 @@
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native'
+import React, {useState} from 'react'
 import * as Linking from "expo-linking";
+import axios from "axios"
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+
 
 export default function home({navigation}) {
+
+  const alertaV = () => {
+    axios({
+        method :"POST",
+        url:"http://54.162.179.163/contactame/action/api_alerta.php",
+        data:{
+            celular,
+            color:"Verde"
+        },
+    })
+    .then((res) => {
+       console.log(res.data);
+    })
+    .catch((e) => {
+       alert(e.message);
+    })
+}
+
+const alertaA = () => {
+  axios({
+      method :"POST",
+      url:"http://54.162.179.163/contactame/action/api_alerta.php",
+      data:{
+          celular,
+          color:"Amarillo"
+      },
+  })
+  .then((res) => {
+     console.log(res.data);
+  })
+  .catch((e) => {
+     alert(e.message);
+  })
+  
+}
+
+  const [color, setColor] =useState("")
+
+ 
   const nombre = 'JESUS JARABA'
-  const numero = '3003072268'
+  const celular = '3003072268'
   const emergencia = '+57 3003072268'
+
 
   const llamar = () => {
     Linking.openURL(`tel:${emergencia}`)
   }
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.cabecera}>
@@ -20,7 +64,7 @@ export default function home({navigation}) {
         </View>
         <View style={styles.cabecerarow}>
           <Text style={styles.text1}>Número:</Text>
-          <Text style={styles.text2}> { numero } </Text>
+          <Text style={styles.text2} > {celular} </Text>
         </View>
         <View style={styles.cabecerarow}>
           <Text style={styles.text1}>Dispostivo:</Text>
@@ -31,9 +75,19 @@ export default function home({navigation}) {
       <View style={styles.botones}>
         <Text style={styles.titulo}>TeleAsistencia</Text>
         <View style={styles.cabecerarow2}>
-          <TouchableOpacity style={styles.btnAmarillo} onPress={() => alert('manda una alerta amarilla')}>
+          <TouchableOpacity style={styles.btnAmarillo} onPress={alertaA}>
+          <TextInput 
+                style={styles.input}
+                value={color }
+                onChangeText={(text) => setColor(text)}
+            />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnVerde} onPress={() => alert('manda una alerta verde')}>
+          <TouchableOpacity style={styles.btnVerde} onPress={alertaV}>
+          <TextInput 
+                style={styles.input}
+                value={color}
+                onChangeText={(text) => setColor(text)}
+            />
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.btnRojo} onPress={llamar}>
@@ -46,6 +100,7 @@ export default function home({navigation}) {
     </View>
   )
 }
+
 const styles = StyleSheet.create({
   container:{
     alignItems: 'center',
