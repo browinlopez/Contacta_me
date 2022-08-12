@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import * as Linking from "expo-linking";
 import axios from "axios"
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import loged from '../screens/login'
 
 
 
@@ -93,7 +94,7 @@ const alertaA = () => {
         <TouchableOpacity style={styles.btnRojo} onPress={llamar}>
           <Text style={styles.textbuton1}>Llamada de emergencia</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnHelp} onPress={()=>navigation.navigate('login')}>
+        <TouchableOpacity style={styles.btnHelp} onPress={()=>navigation.navigate('instrucciones')}>
           <Text style={styles.textbuton2}>¿ Cómo usar los botones ?</Text>
         </TouchableOpacity>
       </View>
