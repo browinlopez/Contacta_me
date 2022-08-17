@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Contactame",
-    "slug": "Contactame",
+    "name": "ContactaMe",
+    "slug": "ContactaMe",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

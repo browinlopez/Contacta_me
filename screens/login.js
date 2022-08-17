@@ -1,39 +1,45 @@
 import { View, Text, StyleSheet,Image, TextInput, TouchableOpacity} from 'react-native'
 import React, {useState} from 'react'
 import axios from 'axios'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
+import { useAuth } from '../AuthContext'
 
 
-
-
-export default function login({navigation}) {
-
+const Login = () => {
 
     //3015490654
 
-    const loged = () => {
+    const [celular,setCelular] = useState("");
+    const [password,setPassword] = useState("");
+    const [isLoading,setIsLoading] = useState(false);
+    const [error,setError] = useState("");
+    const navigation = useNavigation();
+    const [_, setUser] = useAuth();
+
+    const handleLogin = () => {
+        setIsLoading(true);
         axios({
-            method :"POST",
+            method:"POST",
             url:"http://54.162.179.163/contactame/action/api_login.php",
             data:{
                 celular,
                 password,
-            },
+            }
         })
-        .then((res) => {
-            navigation.navigate('home')
-            console.log(res.data);
+        .then(res => {
+            setUser(res.data)
+        }).catch(e => {
+            console.log(e,"Error al iniciar seccion")
+            alert("Verifique sus datos:",e.message)
         })
-        .catch((e) => {
-           alert(e.message);
-        })
-    }
+        .finally(() => {
+            setIsLoading(false)
+        });
 
-   const [celular,setCelular] = useState("");
-   const [password,setPassword] = useState("");
-
-  return (
-    <View style={styles.container}>
+    }; 
+    
+    return (
+        <View style={styles.container}>
         <View style={styles.container2}>
 
             <Image style={styles.image} source={require('../assets/contacta.webp')}/>
@@ -52,7 +58,7 @@ export default function login({navigation}) {
                 onChangeText={(text) => setPassword(text)}
             />
 
-            <TouchableOpacity onPress={loged} style={styles.buton} >
+            <TouchableOpacity onPress={handleLogin} style={styles.buton} loading={isLoading} >
                 <Text style={styles.textbuton}>
                     Ingresar
                 </Text>
@@ -119,4 +125,5 @@ const styles = StyleSheet.create({
         color:'#ffffff',
         fontSize: 20
     }
-})
+}) 
+export default Login;

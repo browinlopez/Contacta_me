@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
       rojo:{
         color:'red'
     }
-})
+}) 

@@ -2,9 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native
 import React, {useState} from 'react'
 import * as Linking from "expo-linking";
 import axios from "axios"
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import loged from '../screens/login'
-
+import { useAuth } from '../AuthContext';
 
 
 export default function home({navigation}) {
@@ -42,14 +40,16 @@ const alertaA = () => {
      alert(e.message);
   })
   
+
 }
 
-  const [color, setColor] =useState("")
 
+  const [color, setColor] =useState("")
+  const [user] = useAuth();
  
   const nombre = 'JESUS JARABA'
-  const celular = '3003072268'
-  const emergencia = '+57 3003072268'
+  const celular = user.celular
+  const emergencia = '+573009109978'
 
 
   const llamar = () => {
@@ -61,11 +61,11 @@ const alertaA = () => {
       <View style={styles.cabecera}>
         <View style={styles.cabecerarow}>
           <Text style={styles.text1}>Nombre:</Text>
-          <Text style={styles.text2}> { nombre } </Text>
+          <Text style={styles.text2}> {user.nombre} </Text>
         </View>
         <View style={styles.cabecerarow}>
           <Text style={styles.text1}>Número:</Text>
-          <Text style={styles.text2} > {celular} </Text>
+          <Text style={styles.text2} > {user.celular} </Text>
         </View>
         <View style={styles.cabecerarow}>
           <Text style={styles.text1}>Dispostivo:</Text>
@@ -79,8 +79,9 @@ const alertaA = () => {
           <TouchableOpacity style={styles.btnAmarillo} onPress={alertaA}>
           <TextInput 
                 style={styles.input}
-                value={color }
+                value={color}
                 onChangeText={(text) => setColor(text)}
+                disabled
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnVerde} onPress={alertaV}>
@@ -88,6 +89,7 @@ const alertaA = () => {
                 style={styles.input}
                 value={color}
                 onChangeText={(text) => setColor(text)}
+                
             />
           </TouchableOpacity>
         </View>
@@ -204,5 +206,9 @@ const styles = StyleSheet.create({
     color:'#00000060',
     fontWeight: 'bold',
     fontSize: 15
+  },
+  input:{
+    width:0,
+    height:0
   }
 })
