@@ -30,7 +30,7 @@ const alertaA = () => {
       url:"http://54.162.179.163/contactame/action/api_alerta.php",
       data:{
           celular,
-          color:"Amarillo"
+          color:"Amarille"
       },
   })
   .then((res) => {
@@ -43,6 +43,31 @@ const alertaA = () => {
 
 }
 
+const alertaR = () => {
+  axios({
+      method :"POST",
+      url:"http://54.162.179.163/contactame/action/api_alerta.php",
+      data:{
+          celular,
+          color:"Rojo"
+      },
+  })
+  .then((res) => {
+     console.log(res.data);
+  })
+  .catch((e) => {
+     alert(e.message);
+  })
+  
+  Linking.openURL(`tel:${emergencia}`)
+}
+
+ const logout = () => {
+  
+  
+
+ }
+
 
   const [color, setColor] =useState("")
   const [user] = useAuth();
@@ -52,9 +77,6 @@ const alertaA = () => {
   const emergencia = '+573009109978'
 
 
-  const llamar = () => {
-    Linking.openURL(`tel:${emergencia}`)
-  }
   
   return (
     <View style={styles.container}>
@@ -93,11 +115,14 @@ const alertaA = () => {
             />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.btnRojo} onPress={llamar}>
+        <TouchableOpacity style={styles.btnRojo} onPress={alertaR}>
           <Text style={styles.textbuton1}>Llamada de emergencia</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btnHelp} onPress={()=>navigation.navigate('instrucciones')}>
           <Text style={styles.textbuton2}>¿ Cómo usar los botones ?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btnCs} onPress={logout}>
+          <Text style={styles.textbuton2}>Cerrar Sesión</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -185,6 +210,20 @@ const styles = StyleSheet.create({
   },
   btnHelp:{
     width: '80%',
+    height: 40,
+    borderRadius:15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 15,
+    backgroundColor:'#dcdeeb80',
+    borderColor:'#c1c1c1',
+    borderBottomWidth:2,
+    borderStartWidth: 0.5,
+    borderEndWidth: 0.5,
+    borderTopWidth: 0,
+  },
+  btnCs:{
+    width: '50%',
     height: 40,
     borderRadius:15,
     justifyContent: 'center',
