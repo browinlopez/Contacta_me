@@ -10,7 +10,7 @@ export default function instrucciones({navigation}) {
         </Text>
       <View>
         <Text style={styles.textbuton2}>
-            <Text style={styles.verde}>VERDE:</Text> Si usted presionó el botón verde.
+            <Text style={styles.verde}>VERDE:</Text> Si usted presionó el botón verde, un asesor se comunicara con usted en el transcurso del dia.
         </Text>
         <Text style={styles.textbuton2}>
         <Text style={styles.amarillo}>AMARILLO:</Text>  Si usted presionó el botón amarillo se le contestataria de una manera inmediata.

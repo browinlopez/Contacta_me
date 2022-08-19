@@ -30,7 +30,7 @@ const alertaA = () => {
       url:"http://54.162.179.163/contactame/action/api_alerta.php",
       data:{
           celular,
-          color:"Amarille"
+          color:"Amarilla"
       },
   })
   .then((res) => {
